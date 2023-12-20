@@ -3,5 +3,11 @@
  * @return {number}
  */
 var minPartitions = function(n) {
-    return n.split('').reduce((acc, cur) => acc >= cur ? acc : cur, 1);
+    for (let i = 9; i > 0; i--) {
+        if (n.includes(i)) {
+            return i;
+        }
+    }
+
+    return 0
 };
