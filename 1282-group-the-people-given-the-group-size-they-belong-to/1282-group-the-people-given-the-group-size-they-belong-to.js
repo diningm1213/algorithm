@@ -3,22 +3,20 @@
  * @return {number[][]}
  */
 var groupThePeople = function(groupSizes) {
-    const group = [];
-    const groupSizesMap = new Map();
+    const groups = [];
+    const groupSizesObj = {}
     for(let i = 0; i < groupSizes.length; i++) {
         const groupSize = groupSizes[i];
-        if (groupSizesMap.has(groupSize)) {
-            groupSizesMap.set(groupSize, [...groupSizesMap.get(groupSize), i])
-        } else {
-            groupSizesMap.set(groupSize,[i]);
+        if (!groupSizesObj[groupSize]) {
+            groupSizesObj[groupSize] = [];
+        }
+        groupSizesObj[groupSize].push(i);
+
+        if (groupSizesObj[groupSize].length === groupSize) {
+            groups.push(groupSizesObj[groupSize]);
+            groupSizesObj[groupSize] = null;
         }
     }
 
-    for (const [groupSize, groupSizeMap] of groupSizesMap) {
-        while (groupSizeMap.length) {
-            group.push(groupSizeMap.splice(0, groupSize));
-        }
-    }
-
-    return group;
+    return groups;
 };
