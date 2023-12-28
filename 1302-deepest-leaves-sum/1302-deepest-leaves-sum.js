@@ -11,24 +11,32 @@
  * @return {number}
  */
 var deepestLeavesSum = function(root) {
-    let maxDepth = 0;
-    const leaves = [];
-    const recursive = (depth, node) => {
-        if (!node || !node?.val) {
+    let depth = 0;
+    let answer = 0;
+    const dfs = (node, curDepth) => {
+        if (!node) {
             return;
         }
-        if (node?.left?.val === undefined && node?.right?.val === undefined) {
-            if (maxDepth < depth) {
-                maxDepth = depth;
+        
+        if (node.left === null && node.right === null) {
+            const val = node.val;
+            if (depth < curDepth) {
+                depth = curDepth;
+                answer = val;
+            } else if (depth === curDepth) {
+                answer += val;
             }
-            leaves.push([depth, node.val])
+        } else {
+            if (node.left) {
+                dfs(node.left, curDepth + 1);
+            }
+            if (node.right) {
+                dfs(node.right, curDepth + 1);
+            }
         }
-
-        recursive(depth + 1, node?.left);
-        recursive(depth + 1, node?.right);
     }
 
-    recursive(0, root);
+    dfs(root, 0);
 
-    return leaves.filter(leave => leave[0] === maxDepth).reduce((acc, cur) => acc + cur[1], 0);
+    return answer;
 };
