@@ -4,8 +4,21 @@
  * @param {string} longUrl
  * @return {string}
  */
+
+const urlMap = new Map();
+let count = 0;
+
 var encode = function(longUrl) {
-    return longUrl;
+    if (urlMap.has(longUrl)) {
+        return urlMap.get(longUrl);
+    } else {
+        const shortUrl = `http://tinyurl.com/${count.toString()}`
+        urlMap.set(shortUrl, longUrl);
+        urlMap.set(longUrl, shortUrl);
+        count++;
+        
+        return shortUrl;
+    }
 };
 
 /**
@@ -15,7 +28,7 @@ var encode = function(longUrl) {
  * @return {string}
  */
 var decode = function(shortUrl) {
-    return shortUrl;
+    return urlMap.get(shortUrl);
 };
 
 /**
