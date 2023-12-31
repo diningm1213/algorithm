@@ -1,32 +1,29 @@
-const Gabage = {
-    metal: 'M',
-    paper: 'P',
-    glass: 'G'
-} as const;
-
-type Gabage = typeof Gabage[keyof typeof Gabage];
-type GarbageInfo = {count: number, lastIndex: number};
-
 function garbageCollection(garbage: string[], travel: number[]): number {
-    const accTravel = [travel[0]];
-    let garbageInfo: { [key in Gabage]: GarbageInfo } = {
-        M: { count: 0, lastIndex: -1 },
-        P: { count: 0, lastIndex: -1 },
-        G: { count: 0, lastIndex: -1 },
-    };
+  let collectingGlass = false, collectingMetal = false, collectingPaper = false;
+  let totalTravelTime = 0;
+  let truckTimes = 0;
 
-    for (let i = 0; i < garbage.length; i++) {
-        for (let j = 0; j < garbage[i].length; j++) {
-            garbageInfo[garbage[i][j]].count++;
-            garbageInfo[garbage[i][j]].lastIndex = i;
-        }
-        
-        if (i >= 2) {
-            accTravel.push(accTravel[i - 2] + travel[i - 1]);
-        }
+  // 뒤에서부터 collecting을 검사
+  // 매번 G, M, P를 검사할 필요없이 그냥 length를 더해준다..
+  for (let i = garbage.length -1; i >= 0; i--) {
+    const currGarbage = garbage[i];
+
+    if (!collectingGlass && currGarbage.match(/G/g)) {
+      collectingGlass = true;
+      truckTimes++;
+    }
+    if (!collectingMetal && currGarbage.match(/M/g)) {
+      collectingMetal = true;
+      truckTimes++;
+    }
+    if (!collectingPaper && currGarbage.match(/P/g)) {
+      collectingPaper = true;
+      truckTimes++;
     }
 
-    return Object.values(garbageInfo).reduce((acc, cur) => 
-        acc + cur.count + (cur.lastIndex <= 0 ? 0 : accTravel[cur.lastIndex - 1])
-    , 0);
+    const truckTravelTime = (travel[i - 1] ?? 0) * truckTimes;
+    totalTravelTime += currGarbage.length + truckTravelTime;
+  }
+
+  return totalTravelTime;
 };
