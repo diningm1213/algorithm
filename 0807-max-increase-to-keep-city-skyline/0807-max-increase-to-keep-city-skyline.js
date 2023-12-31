@@ -5,23 +5,22 @@
 var maxIncreaseKeepingSkyline = function(grid) {
     let answer = 0;
     const n = grid.length;
-    const maxRows = Array(n).fill(0);
-    const maxCols = Array(n).fill(0);
+    const maxRows = [];
+    const maxCols = [];
     for (let y = 0; y < n; y++) {
-        for (let i = 0; i < n; i++) {
-            if (maxRows[i] < grid[y][i]) {
-                maxRows[i] = grid[y][i];
-            }
-            if (maxCols[i] < grid[i][y]) {
-                maxCols[i] = grid[i][y];
-            }
+        let maxRow = grid[y][0];
+        let maxCol = grid[0][y];
+        for (let x = 0; x < n; x++) {
+            maxRow = Math.max(maxRow, grid[y][x]);
+            maxCol = Math.max(maxCol, grid[x][y]);
         }
+        maxRows.push(maxRow);
+        maxCols.push(maxCol);
     }
 
     for (let y = 0; y < n; y++) {
         for (let x = 0; x < n; x++) {
-            const min = Math.min(maxRows[y], maxCols[x]);
-            answer += min - grid[y][x];
+            answer += Math.min(maxRows[y], maxCols[x]) - grid[y][x];
         }
     }
 
