@@ -12,16 +12,16 @@
  */
 var bstToGst = function(root) {
     let sum = 0;
-    const dfs = (node) => {
+    const greaterSum = (node) => {
         if (node?.val === undefined) {
             return null;
         }
-        dfs(node?.right)
+        greaterSum(node?.right)
         sum += node.val;
         node.val = sum;
-        dfs(node?.left);
+        greaterSum(node?.left);
     }
-    dfs(root);
+    greaterSum(root);
 
     return root;
 };
