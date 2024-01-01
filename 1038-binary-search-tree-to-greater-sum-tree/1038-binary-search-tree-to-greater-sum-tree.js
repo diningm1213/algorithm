@@ -16,12 +16,7 @@ var bstToGst = function(root) {
         if (node?.val === undefined) {
             return null;
         }
-        if (!node?.right && !node?.left) {
-            sum += node.val;
-            node.val = sum;
-            return node.val;
-        }
-        const rightVal = dfs(node?.right)
+        dfs(node?.right)
         sum += node.val;
         node.val = sum;
         dfs(node?.left);
