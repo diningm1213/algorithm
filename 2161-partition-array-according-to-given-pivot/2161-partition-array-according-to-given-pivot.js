@@ -5,19 +5,19 @@
  */
 var pivotArray = function(nums, pivot) {
     const lessThanPivot = [];
+    const equalToPivot = [];
     const greaterThanPivot = [];
-    let equalCount = 0;
 
     for (let i = 0; i < nums.length; i++) {
         const num = nums[i];
         if (num < pivot) {
             lessThanPivot.push(num);
-        } else if (num > pivot) {
-            greaterThanPivot.push(num);
+        } else if (num === pivot) {
+            equalToPivot.push(num);
         } else {
-            equalCount++;
+            greaterThanPivot.push(num);
         }
     }
 
-    return [...lessThanPivot, ...Array(equalCount).fill(pivot), ...greaterThanPivot];
+    return [...lessThanPivot, ...equalToPivot, ...greaterThanPivot];
 };
