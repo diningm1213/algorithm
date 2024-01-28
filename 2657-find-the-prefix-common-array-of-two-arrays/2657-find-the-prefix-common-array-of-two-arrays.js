@@ -5,22 +5,12 @@
  */
 var findThePrefixCommonArray = function(A, B) {
     let arr = [];
-    let count = 0;
     const prefixCommonSet = new Set();
 
     for (let i = 0, len = A.length; i < len; i++) {
-        const a = A[i];
-        const b = B[i];
-
-        if (prefixCommonSet.has(a)) {
-            count++;
-        }
-        prefixCommonSet.add(a);
-        if (prefixCommonSet.has(b)) {
-            count++;
-        }
-        prefixCommonSet.add(b);
-        arr.push(count);
+        prefixCommonSet.add(A[i]);
+        prefixCommonSet.add(B[i]);
+        arr.push((i + 1) * 2 - prefixCommonSet.size);
     }
 
     return arr;
