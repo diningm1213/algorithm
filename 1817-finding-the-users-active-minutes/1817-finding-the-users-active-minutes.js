@@ -4,7 +4,7 @@
  * @return {number[]}
  */
 var findingUsersActiveMinutes = function(logs, k) {
-    const answer = Array.from(Array(k), () => 0);
+    const answer = Array(k).fill(0);
     const map = new Map();
     logs.forEach(([id, time]) => {
         const getMap = map.get(id);
@@ -15,7 +15,7 @@ var findingUsersActiveMinutes = function(logs, k) {
         }
     });
 
-    for (const [key, value] of map.entries()) {
+    for (const value of map.values()) {
         answer[value.size - 1]++;
     }
 
