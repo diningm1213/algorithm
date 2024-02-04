@@ -3,7 +3,7 @@
  * @return {number}
  */
 var triangularSum = function(nums) {
-    while(nums.length !== 1) {
+    while(nums.length > 1) {
         for (let i = 0; i < nums.length; i++) {
             nums[i] = (nums[i] + nums[i + 1]) % 10;
         }
