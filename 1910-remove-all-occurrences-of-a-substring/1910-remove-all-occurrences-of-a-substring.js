@@ -4,13 +4,9 @@
  * @return {string}
  */
 var removeOccurrences = function(s, part) {
-    const partReg = new RegExp(part);
-    let prevLen = 0;
-    
-    while(s.length !== prevLen) {
-        prevLen = s.length;
-        s = s.replace(partReg, '');
+    while (s.includes(part)) {
+        s = s.replace(part, '')
     }
-
+    
     return s;
 };
