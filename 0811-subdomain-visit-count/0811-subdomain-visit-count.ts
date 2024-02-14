@@ -5,19 +5,17 @@ function subdomainVisits(cpdomains: string[]): string[] {
   cpdomains.forEach((cpdomain) => {
     const [cp, domain] = cpdomain.split(" ");
     const splitSubdomains = domain.split(".").reverse();
-    let subdomain = "";
-    splitSubdomains.forEach((splitSubdomain) => {
-      if (subdomain) {
-        subdomain = [splitSubdomain, subdomain].join(".");
-      } else {
-        subdomain = splitSubdomain;
-      }
-
+    splitSubdomains.reduce<string[]>((acc, cur) => {
+      acc.unshift(cur);
+      const combinedDomain = acc.join(".");
       subdomainMap.set(
-        subdomain,
-        subdomainMap.has(subdomain) ? subdomainMap.get(subdomain) + +cp : +cp
+        combinedDomain,
+        subdomainMap.has(combinedDomain)
+          ? subdomainMap.get(combinedDomain) + +cp
+          : +cp
       );
-    });
+      return acc;
+    }, []);
   });
 
   for (const [key, value] of subdomainMap.entries()) {
