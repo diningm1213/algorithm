@@ -4,17 +4,17 @@ function solution(cacheSize, cities) {
     
     cities.forEach(_city => {
         const city = _city.toLowerCase();
-        const findIndex = cache.findIndex(c => c === city);
+        const index = cache.indexOf(city);
         
         cache.push(city);
         
-        if (findIndex === -1) {
+        if (index === -1) {
             if (cache.length > cacheSize) {
                 cache.shift();
             }
             runTime += 5;
         } else {
-            cache.splice(findIndex, 1);
+            cache.splice(index, 1);
             runTime++;
         }
     });
