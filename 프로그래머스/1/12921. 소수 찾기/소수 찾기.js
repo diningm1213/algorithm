@@ -9,7 +9,5 @@ function solution(n) {
         }
     }
     
-    console.log(memo);
-    
     return memo.filter(v => !v).length
 }
