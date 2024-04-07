@@ -1,30 +1,21 @@
 function solution(s) {
     let ans = 0;
     let x = '';
-    let xCount = 0;
-    let yCount = 0;
+    let count = 0;
     
     [...s].forEach(c => {
-        if (!x) {
+        if (!x || x === c) {
             x = c;
-            xCount = 1;
-        } else if (x === c) {
-            xCount++;
+            count++;
         } else {
-            yCount++;
+            count--;
         }
         
-        if (xCount === yCount) {
+        if (count === 0) {
             ans++;
             x = '';
-            xCount = 0;
-            yCount = 0;
         }
     });
     
-    if (x) {
-        ans++;
-    }
-    
-    return ans;
+    return x ? ans + 1 : ans;
 }
