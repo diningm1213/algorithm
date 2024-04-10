@@ -1,3 +1,3 @@
 function solution(box, n) {
-    return box.map(line => parseInt(line / n)).reduce((acc, cur) => acc * cur, 1);
+    return box.reduce((acc, cur) => acc * Math.floor(cur / n), 1);
 }
