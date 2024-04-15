@@ -1,14 +1,17 @@
 function solution(s) {
+    if (s.length % 2 === 1) {
+        return 0;
+    }
+    
     let stack = [];
     
     for (let i = 0; i < s.length; i++) {
-        stack.push(s[i]);
+        const c = s[i];
         
-        const lastStackIndex = stack.length - 1;
-        if (lastStackIndex >= 1) {
-            if (stack[lastStackIndex] === stack[lastStackIndex - 1]) {
-                stack.splice(-2);
-            }
+        if (stack[stack.length - 1] === c) {
+            stack.pop();
+        } else {
+            stack.push(c);
         }
     }
     
