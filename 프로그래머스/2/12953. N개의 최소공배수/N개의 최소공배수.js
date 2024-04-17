@@ -7,11 +7,5 @@ const gcd = (a, b) => {
 }
 
 function solution(arr) {
-    let lcm = arr[0];
-    
-    for (let i = 1; i < arr.length; i++) {
-        lcm = lcm * arr[i] / gcd(lcm, arr[i]);    
-    }
-    
-    return lcm;
+    return arr.reduce((acc, cur) => acc * cur / gcd(acc, cur), 1);
 }
