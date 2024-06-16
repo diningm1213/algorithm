@@ -1,4 +1,10 @@
 function solution(binomial) {
+    const opers = {
+        '+': (a, b) => a + b,
+        '-': (a, b) => a - b,
+        '*': (a, b) => a * b
+    };
+    
     const [a, oper, b] = binomial.split(' ');
-    return oper === '+' ? +a + +b : oper === '-' ? +a - +b : +a * +b;
+    return opers[oper](+a, +b);
 }
