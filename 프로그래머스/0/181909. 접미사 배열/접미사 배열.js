@@ -1,3 +1,3 @@
 function solution(my_string) {
-    return [...my_string].map((_, i, arr) => arr.slice(i).join('')).sort();
+    return [...my_string].map((_, i) => my_string.substring(i)).sort();
 }
