@@ -6,5 +6,5 @@ function solution(numLog) {
         [-10, 'a']
     ]);
     
-    return numLog.map((num, i, arr) => i > 0 ? oper.get(arr[i] - arr[i - 1]) : '').join('')
+    return numLog.map((num, i, arr) => i > 0 ? oper.get(num - arr[i - 1]) : '').join('')
 }
