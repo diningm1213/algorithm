@@ -1,4 +1,5 @@
 function solution(emergency) {
-    const sortEmergency = [...emergency].sort((a, b) => b - a);
-    return emergency.map(e => sortEmergency.indexOf(e) + 1);
+    const sorted = [...emergency].sort((a, b) => b - a);
+    const rankMap = new Map(sorted.map((e, i) => [e, i + 1]));
+    return emergency.map(e => rankMap.get(e));
 }
