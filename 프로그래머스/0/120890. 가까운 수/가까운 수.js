@@ -1,3 +1,3 @@
 function solution(array, n) {
-    return array.sort((a, b) => a - b).reduce((acc, cur) => Math.abs(acc - n) <= Math.abs(cur - n) ? acc : cur);
+    return array.sort((a, b) => Math.abs(a - n) - Math.abs(b - n) || a - b)[0];
 }
