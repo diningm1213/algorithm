@@ -1,12 +1,8 @@
 function solution(arr) {
-    const stk = [];
+    const ans = arr.reduce((acc, cur) => {
+        acc.length && acc.at(-1) === cur ? acc.pop() : acc.push(cur);
+        return acc;
+    }, []);
     
-    arr.forEach((v, i) => {
-        if (stk.length && stk.at(-1) === v) {
-            stk.pop();
-        } else {
-            stk.push(v)
-        }
-    })
-    return stk.length ? stk : [-1];
+    return ans.length ? ans : [-1];
 }
