@@ -1,4 +1,6 @@
 function solution(keyinput, board) {    
+    const MIN = 0;
+    const MAX = 1;
     const dir = {
         'up': [0, 1],
         'down': [0, -1],
@@ -15,10 +17,10 @@ function solution(keyinput, board) {
     keyinput.forEach(key => {
         dir[key].forEach((v, i) => {
             coord[i] += v;
-            if (coord[i] < board[i][0]) {
-                coord[i] = board[i][0]
-            } else if (coord[i] > board[i][1]) {
-                coord[i] = board[i][1]
+            if (coord[i] < board[i][MIN]) {
+                coord[i] = board[i][MIN]
+            } else if (coord[i] > board[i][MAX]) {
+                coord[i] = board[i][MAX]
             } 
         });
     });
