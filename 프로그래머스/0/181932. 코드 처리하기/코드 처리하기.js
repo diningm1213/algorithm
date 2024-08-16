@@ -1,18 +1,18 @@
 function solution(code) {
-    const ret = [];
-    let mode = false;
+    let ret = '';
+    let mode = 0;
     
     [...code].forEach((c, i) => {
         if (c === '1') {
-            mode = !mode;
+            mode = mode === 0 ? 1 : 0;
             return;
         }
-        const odd = i % 2 === 1;
+        const check = i % 2 === mode;
         
-        if ((!mode && !odd) || (mode && odd)) {
-            ret.push(c);
+        if (check) {
+            ret += c;
         }
     });
     
-    return ret.length ? ret.join('') : 'EMPTY';
+    return ret || 'EMPTY';
 }
