@@ -7,9 +7,8 @@ function solution(code) {
             mode = mode === 0 ? 1 : 0;
             return;
         }
-        const check = i % 2 === mode;
         
-        if (check) {
+        if (i % 2 === mode) {
             ret += c;
         }
     });
