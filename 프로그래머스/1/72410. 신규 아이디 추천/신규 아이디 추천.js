@@ -1,31 +1,11 @@
 function solution(new_id) {
-    new_id = new_id.toLowerCase()
-        .match(/[a-z0-9-_.]/g).join('')
-        .replaceAll(/\.+/g, '.');
+    const ans = new_id
+        .toLowerCase() // 1
+        .replace(/[^\w-_.]/g, '') // 2
+        .replace(/\.+/g, '.') // 3
+        .replace(/^\.|\.$/g, '') // 4
+        .replace(/^$/, 'a') // 5
+        .slice(0, 15).replace(/\.$/, ''); // 6
     
-    if (new_id.startsWith('.')) {
-        new_id = new_id.slice(1);
-    }
-
-    if (new_id.endsWith('.')) {
-        new_id = new_id.slice(0, new_id.length - 1);
-    }
-    
-    if (!new_id) {
-        new_id = 'a';
-    }
-    
-    if (new_id.length >= 16) {
-        new_id = new_id.slice(0, 15);
-
-        if (new_id.endsWith('.')) {
-            new_id = new_id.slice(0, new_id.length - 1);
-        }
-    }
-    
-    if (new_id.length <= 2) {
-        new_id = new_id.padEnd(3, new_id.at(-1));
-    }
-    
-    return new_id;
+    return ans.length <= 2 ? ans.padEnd(3, ans.at(-1)) : ans;
 }
