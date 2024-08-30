@@ -17,11 +17,15 @@ function solution(dirs) {
         
         if (newX >= -MAX_SIZE && newX <= MAX_SIZE && 
             newY >= -MAX_SIZE && newY <= MAX_SIZE) {
-            moveSet.add(`${x}-${y}-${newX}-${newY}`);
-            moveSet.add(`${newX}-${newY}-${x}-${y}`);
+            // 같은 방향으로 이동 할 수 있게 증가, 감소에 따라 위치를 변경           
+            if (dir === 'U' || dir === 'R') {
+                moveSet.add(`${x}-${y}-${newX}-${newY}`);    
+            } else {
+                moveSet.add(`${newX}-${newY}-${x}-${y}`);    
+            }
             startPos = [newX, newY];
         }
     });
     
-    return moveSet.size / 2;
+    return moveSet.size;
 }
